@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-blue
+  name: web-green
 spec:
   replicas: 3
   selector:
     matchLabels:
       app: web
-      version: blue
+      version: green
   template:
     metadata:
       labels:
         app: web
-        version: blue
+        version: green
     spec:
       containers:
       - name: web
