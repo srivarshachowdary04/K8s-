@@ -1,53 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: apache-deploy
-  labels:
-    app: apache
+  name: web-blue
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: apache
+      app: web
+      version: blue
   template:
     metadata:
       labels:
-        app: apache
+        app: web
+        version: blue
     spec:
       containers:
-      - name: apache
-        image: httpd:2.4
-        ports:apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: apache
-spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: apache
-  template:
-    metadata:
-      labels:
-        app: apache
-    spec:
-      containers:
-      - name: apache
-        image: httpd:2.4
+      - name: web
+        image: nginx
         ports:
         - containerPort: 80
- 
-        - containerPort: 80
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: apache-service
-spec:
-  type: NodePort
-  selector:
-    app: apache
-  ports:
-  - port: 80
-    targetPort: 80
-    nodePort: 30080
