@@ -1,21 +1,12 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Service
 metadata:
-  name: web-green
+  name: web-service
 spec:
-  replicas: 3
+  type: NodePort
   selector:
-    matchLabels:
-      app: web
-      version: green
-  template:
-    metadata:
-      labels:
-        app: web
-        version: green
-    spec:
-      containers:
-      - name: web
-        image: nginx
-        ports:
-        - containerPort: 80
+    app: web
+    version: blue
+  ports:
+  - port: 80
+    targetPort: 80
